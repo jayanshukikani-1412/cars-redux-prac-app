@@ -24,6 +24,7 @@ const CardForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(addCar({ name: name,cost: cost }));
+    
   };
 
   return (

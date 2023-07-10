@@ -6,7 +6,7 @@ import CardValue from "./Components/CardValue";
 
 const App = () => {
   return (
-    <div>
+    <div className="container is-fluid">
       <CardForm />
       <CardSearch />
       <CardList />

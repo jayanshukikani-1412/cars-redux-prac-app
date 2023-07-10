@@ -4,12 +4,18 @@ import { removeCar } from "../Store/Slices/CarsSlice";
 
 const CardList = () => {
   const dispatch = useDispatch();
-  const cars = useSelector(({ cars: { searchTerm, data } }) => {
-    return data.filter((car) => {
+  
+  const {cars, name} = useSelector(({ form, cars: { searchTerm, data } }) => {
+    const filteredCars = data.filter((car) => {
       return(
         car.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
     });
+
+    return {
+      cars: filteredCars,
+      name: form.name
+    }
   });
 
   const handleCarDelete = (car) => {
@@ -17,8 +23,11 @@ const CardList = () => {
   };
 
   const renderedCars = cars.map((car) => {
+    //  DECIDE IF THIS CAR SHOULD BE BOLD
+    // state.form.name
+    const bold = name && car.name.toLowerCase().includes(name.toLowerCase())
     return (
-      <div key={car.id} className="panel">
+      <div key={car.id} className={`panel ${bold && 'bold'}`}>
         <p>
           {car.name} - ${car.cost}
         </p>
